@@ -1,8 +1,6 @@
 package com.bakay;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class FlowerBucket {
@@ -75,16 +73,15 @@ public class FlowerBucket {
 
         ArrayList<Flower> tmp = new ArrayList<Flower>();
         for (int i = 0; i < insertIndex; i++) {
-            if (a[i].getType().equals(type)) {
+            if (type.getType().equals(a[i].getType())) {
                 tmp.add(a[i]);
             }
         }
-
         return tmp;
     }
 
-    public List search(FlowerSpec flower){
-        List matchingFlowers = new LinkedList();
+    public List<Flower> search(FlowerSpec flower){
+        List<Flower> matchingFlowers = new ArrayList<Flower>();
         for (int i=0; i < insertIndex; i++){
             if(flower.getColor() != a[i].getColor())
                 continue;
@@ -93,6 +90,7 @@ public class FlowerBucket {
             if (flower.getType() != a[i].getType())
                 continue;
             matchingFlowers.add(a[i]);
+            matchingFlowers.toArray();
         }
         return matchingFlowers;
 
