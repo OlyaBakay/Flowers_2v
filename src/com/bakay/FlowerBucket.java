@@ -11,33 +11,35 @@ public class FlowerBucket {
     public void addFlower(Flower nw) {
         checkSize();
         a[insertIndex] = nw;
-        insertIndex ++;
+        insertIndex++;
     }
 
-    private void checkSize(){
+    private void checkSize() {
         if (insertIndex == defaultSize - 1) {
             defaultSize *= 2;
             Flower[] b = new Flower[defaultSize];
-            for (int i = 0; i <= insertIndex; i ++) {
+            for (int i = 0; i <= insertIndex; i++) {
                 b[i] = a[i];
             }
             a = b;
         }
     }
+
     public void sortByPrice() {
-        for (int i = 1; i < insertIndex; i ++) {
+        for (int i = 1; i < insertIndex; i++) {
             Flower tmp = a[i];
             int j = i - 1;
             while (j >= 0 && (a[i].getPrice() < a[j].getPrice())) {
                 a[i] = a[j];
-                j --;
+                j--;
             }
             a[j + 1] = tmp;
         }
     }
+
     public String toString() {
         String s = "";
-        for (int i = 0; i < insertIndex; i ++) {
+        for (int i = 0; i < insertIndex; i++) {
             s += a[i].toString() + "\n";
         }
         return s;
@@ -45,7 +47,7 @@ public class FlowerBucket {
 
     public double getTotalPrice() {
         double sum = 0;
-        for (int i = 0; i < insertIndex; i ++) {
+        for (int i = 0; i < insertIndex; i++) {
             sum += a[i].getPrice();
         }
         return sum;
@@ -54,22 +56,22 @@ public class FlowerBucket {
     public Flower[] selectFlowersByItsLength(double start, double end) {
         int tmpSize = 0;
         for (int i = 0; i < insertIndex; i++) {
-            if (a[i].getLength() <= end && a[i].getLength() >= start ) {
-                tmpSize ++;
+            if (a[i].getLength() <= end && a[i].getLength() >= start) {
+                tmpSize++;
             }
         }
         Flower[] tmpPart = new Flower[tmpSize];
         int tmpIndex = 0;
         for (int i = 0; i < insertIndex; i++) {
-            if (a[i].getLength() <= end && a[i].getLength() >= start ) {
+            if (a[i].getLength() <= end && a[i].getLength() >= start) {
                 tmpPart[tmpIndex] = a[i];
-                tmpIndex ++;
+                tmpIndex++;
             }
         }
         return tmpPart;
     }
 
-    public ArrayList<Flower> getFlower(FlowerSpec type){
+    public ArrayList<Flower> getFlower(FlowerSpec type) {
 
         ArrayList<Flower> tmp = new ArrayList<Flower>();
         for (int i = 0; i < insertIndex; i++) {
@@ -80,12 +82,29 @@ public class FlowerBucket {
         return tmp;
     }
 
-    public List<Flower> search(FlowerSpec flower){
-        List<Flower> matchingFlowers = new ArrayList<Flower>();
-        for (int i=0; i < insertIndex; i++){
-            if(flower.getColor() != a[i].getColor())
+    public Flower[] search(FlowerSpec flower) {
+        Flower[] matchingFlowers = new Flower[a.length];
+        int f = 0;
+        for (int i = 0; i < insertIndex; i++) {
+            if (flower.getColor() != a[i].getColor())
                 continue;
-            if(flower.getLength() != a[i].getLength())
+            if (flower.getLength() != a[i].getLength())
+                continue;
+            if (flower.getType() != a[i].getType())
+                continue;
+            matchingFlowers[f] = a[i];
+            f++;
+        }
+        return matchingFlowers;
+
+    }
+
+    public List<Flower> search_2(FlowerSpec flower) {
+        List<Flower> matchingFlowers = new ArrayList<Flower>();
+        for (int i = 0; i < insertIndex; i++) {
+            if (flower.getColor() != a[i].getColor())
+                continue;
+            if (flower.getLength() != a[i].getLength())
                 continue;
             if (flower.getType() != a[i].getType())
                 continue;
@@ -93,6 +112,5 @@ public class FlowerBucket {
             matchingFlowers.toArray();
         }
         return matchingFlowers;
-
     }
 }

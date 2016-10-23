@@ -1,4 +1,5 @@
 package com.bakay;
+import java.util.Arrays;
 
 public class FlowerMain {
 
@@ -22,7 +23,8 @@ public class FlowerMain {
 
 
         System.out.println(bucket.getFlower(findFlower2));
-        System.out.println(bucket.search(findFlower1));
+        System.out.println(Arrays.toString(bucket.search(findFlower1)));
+        System.out.println(bucket.search_2(findFlower1));
 
     }
 }
